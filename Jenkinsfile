@@ -1,21 +1,22 @@
 pipeline {
-  
-  agent any
-  
-  stages {
-    
-    stage("build") {
-      steps{
-        echo 'Building the application'
-         sh 'mvn clean install -DskipTests'
-      }
+    agent any
+
+    stages {
+        stage('build') {
+            steps {
+                echo 'Build'
+            }
+        }
+        stage('test') {
+            steps {
+                echo 'Test'
+            }
+        }
+        stage('deploy') {
+            steps {
+                echo 'Deploy'
+                emailext body: 'Pipeline ran successfully', subject: 'New mail', to: 'dhansha@gmail.com'
+            }
+        }
     }
-    
-    stage("test") {
-      steps{
-        echo 'Testing the application'
-      }
-    }
-    
-  }
 }
